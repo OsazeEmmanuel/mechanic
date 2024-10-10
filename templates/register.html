@@ -1,0 +1,10 @@
+{% extends "index.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+
+{% block title %} Register {% endblock %}
+{% block body %}
+    <h1>Register New User</h1>
+    <br><br>
+    {{form.csrf_token()}}
+    {{render_form(form)}}
+{% endblock %}
