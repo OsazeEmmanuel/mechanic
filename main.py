@@ -6,10 +6,11 @@ from sqlalchemy import String, Text, Integer, Float
 from sqlalchemy.orm import DeclarativeBase, mapped_column, Mapped
 from flask_login import LoginManager, UserMixin, login_user, logout_user, current_user
 from forms import RegisterForm, LoginForm, MechanicForm
+import os
 
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "Austin200*556"
+app.config["SECRET_KEY"] = os.environ.get("FLASK_KEY")
 bootstrap5 = Bootstrap5(app)
 
 login_manager = LoginManager()
@@ -23,7 +24,7 @@ def load_user(user_id):
 
 class Base(DeclarativeBase):
     pass
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///isede.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DB_URI", "sqlite:///isede.db")
 
 db = SQLAlchemy(model_class=Base)
 db.init_app(app)
